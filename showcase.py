@@ -10,7 +10,6 @@ df = pd.read_sql(sql, engine)
 
 df_pivot = df.pivot(index='created_at', columns='name', values='price')
 
-# 3a. Dual-axis plot
 fig, ax1 = plt.subplots(figsize=(10,5))
 ax1.plot(df_pivot.index, df_pivot['Gold'], color='gold', label='Gold')
 ax1.set_ylabel("Gold Price (USD/oz)", color='gold')
