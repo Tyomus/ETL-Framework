@@ -47,5 +47,5 @@ The following Cron-job entry ensures an automatic run every 30 minutes:
 
 ## Visualization:
 
-A separate PHP file serves as a web frontend that calls the Python script to generate the graph. Using Matplotlib, the historical price data is displayed in a dynamic, colored line chart. The visualization is regenerated with every page load (or automated page load) to reflect the most up-to-date data.
+A separate PHP file serves as a web frontend that calls the Python script to generate the interactive graph with the help of Plotly.
 
