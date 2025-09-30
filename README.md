@@ -10,12 +10,14 @@ This project demonstrates a complete ETL (Extract, Transform, Load) pipeline for
 <img width="1024" height="480" alt="inspection" src="https://github.com/user-attachments/assets/8c347676-ae3a-4fb6-8433-ef9711d30abd" />
 
 The extraction phase uses web scraping to collect financial data from an external website. Instead of a public API, the data points for gold and Bitcoin prices were directly extracted from the site's source code. 
-The relevant data, in JSON format, was identified by manually inspecting the network traffic using a browser's developer tools (in the Fetch/XHR section). This enabled a direct approach to fetching the data URL.
+The relevant data was identified by manually inspecting the network traffic using a browser's developer tools (in the Fetch/XHR section). This enabled a direct approach to fetching the data URL.
 
 *Responsibility: this website does not had any `/robots.txt` instruction for bots/crawlers, and I scheduled an extraction for only every 30 min not to put too much extra load to the site.* 
 
 
 ## Transform:
+
+<img width="700" height="277" alt="json data" src="https://github.com/user-attachments/assets/034bbf99-9988-4c76-b9a2-2535914f3344" />
 
 After extraction, the raw data is transformed into a structured format for database preparation. The Python requests module is used to retrieve the raw JSON data.
 The JSON response is processed to isolate only the relevant fields: the asset name (name) and its price (price) separately a timestamp (created_at) with the time of extraction is also added.
@@ -38,11 +40,11 @@ The data is stored in the "assets" table, which is created using the following S
 
 The pipeline is deployed for continuous, automated execution. The Python script is run on a Raspberry Pi using a Cron job. (The Pi was controlled either headless with terminal SSH commands, or through x2Go client via a Linux Mint based PC) 
 
-The following Cron entry ensures an automatic run every 30 minutes:
-`*/30 * * * * python3 /path/to/scraper.py`
+The following Cron-job entry ensures an automatic run every 30 minutes:
+
+    */30 * * * * python3 /path/to/scraper.py
 
 
-# Coming soon (after enough historical data available for a proper demon): #
 ## Visualization:
 
 A separate PHP file serves as a web frontend that calls the Python script to generate the graph. Using Matplotlib, the historical price data is displayed in a dynamic, colored line chart. The visualization is regenerated with every page load (or automated page load) to reflect the most up-to-date data.
