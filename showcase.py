@@ -1,21 +1,34 @@
 import pandas as pd
-import matplotlib.pyplot as plt
+import plotly.graph_objects as go
 from sqlalchemy import create_engine
 
 engine = create_engine("mariadb+pymysql://tyomus:@localhost/etl_project")
 sql = """
-SELECT created_at, name, price FROM assets WHERE name IN ('Gold','Bitcoin') ORDER BY id;
+SELECT created_at, name, price 
+FROM assets 
+WHERE name IN ('Gold','Bitcoin') 
+ORDER BY id;
 """
 df = pd.read_sql(sql, engine)
 
 df_pivot = df.pivot(index='created_at', columns='name', values='price')
 
-fig, ax1 = plt.subplots(figsize=(10,5))
-ax1.plot(df_pivot.index, df_pivot['Gold'], color='gold', label='Gold')
-ax1.set_ylabel("Gold Price (USD/oz)", color='gold')
+fig = go.Figure()
+fig.add_trace(go.Scatter(x=df_pivot.index,
+                         y=df_pivot['Gold'],
+                         name='Gold',
+                         yaxis='y1',
+                         line=dict(color='gold')))
+fig.add_trace(go.Scatter(x=df_pivot.index,
+                         y=df_pivot['Bitcoin'],
+                         name='Bitcoin',
+                         yaxis='y2',
+                         line=dict(color='darkorange')))
 
-ax2 = ax1.twinx()
-ax2.plot(df_pivot.index, df_pivot['Bitcoin'], color='darkorange', label='Bitcoin')
-ax2.set_ylabel("Bitcoin Price (USD)", color='darkorange')
+fig.update_layout(
+    title="Gold vs Bitcoin (30-min data)",
+    yaxis=dict(title="Gold $/oz", side='left'),
+    yaxis2=dict(title="Bitcoin $", overlaying='y', side='right')
+)
 
 fig.write_html("gold_bitcoin_dualaxis_plot.html", include_plotlyjs="cdn")
