@@ -38,7 +38,8 @@ The data is stored in the "assets" table, which is created using the following S
 
 <img width="480" height="480" alt="x2go" src="https://github.com/user-attachments/assets/2a90c8a2-7f18-476e-8dfe-b24c696ffc68" />
 
-The pipeline is deployed for continuous, automated execution. The Python script is run on a Raspberry Pi using a Cron job. (The Pi was controlled either headless with terminal SSH commands, or through x2Go client via a Linux Mint based PC) 
+The pipeline is deployed for continuous, automated execution. The Python script is run on a Raspberry Pi using a Cron job. 
+(The Pi was controlled either headless with terminal SSH commands, or through x2Go client via a Linux Mint based PC) 
 
 The following Cron-job entry ensures an automatic run every 30 minutes:
 
