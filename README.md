@@ -50,7 +50,9 @@ The following Cron-job entry ensures an automatic run every 30 minutes:
 
 A separate PHP file serves as a web frontend that calls the Python script to generate the interactive graph with the help of the Plotly module.
 
-<img width="2510" height="1397" alt="Screenshot at 2025-09-30 20-37-53" src="https://github.com/user-attachments/assets/a041de82-5f8b-4b0d-8a9e-4e6da5bdc27e" />
+<img width="1000" height="720" alt="Screenshot at 2025-09-30 20-37-53" src="https://github.com/user-attachments/assets/a041de82-5f8b-4b0d-8a9e-4e6da5bdc27e" />
 
-For testing purposes I was using PHPs own built-in server with the following command:`$ php -S localhost:8000`.
+For testing purposes I was using PHPs own built-in server with the following command:
+
+    $ php -S localhost:8000
 
