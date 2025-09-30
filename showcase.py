@@ -18,4 +18,4 @@ ax2 = ax1.twinx()
 ax2.plot(df_pivot.index, df_pivot['Bitcoin'], color='darkorange', label='Bitcoin')
 ax2.set_ylabel("Bitcoin Price (USD)", color='darkorange')
 
-fig.write_html("gold_bitcoin_dualaxis.html", include_plotlyjs="cdn")
+fig.write_html("gold_bitcoin_dualaxis_plot.html", include_plotlyjs="cdn")
